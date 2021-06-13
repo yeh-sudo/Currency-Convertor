@@ -42,7 +42,7 @@ public class Controller implements Initializable {
         target.getItems().addAll(currentType);
     }
 
-    public void exchangeButton(ActionEvent e){
+    public void exchangeButton(){
         if (origin.getValue() == null || target.getValue() == null)
             return;
         int cntOri;
