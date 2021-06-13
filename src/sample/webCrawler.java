@@ -3,11 +3,9 @@ package sample;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-
-
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
@@ -29,9 +27,9 @@ public class webCrawler {
     public ArrayList<String> data = new ArrayList<>();
     public ArrayList<Double> result = new ArrayList<>();
 
-    public webCrawler() {
+    public webCrawler() {}
 
-
+    public void setResult() {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;
 
@@ -52,7 +50,6 @@ public class webCrawler {
                     for (Element d : curdata){
                         data.add(d.text());
                     }
-                    Thread.sleep(1000);
                 }
             }
             else {
@@ -66,9 +63,6 @@ public class webCrawler {
         catch (IOException e) {
             e.printStackTrace();
         }
-        catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         finally {
             HttpClientUtils.closeQuietly(response);
             HttpClientUtils.closeQuietly(httpClient);
@@ -79,5 +73,9 @@ public class webCrawler {
                 continue;
             result.add(Double.parseDouble(data.get(i)));
         }
+    }
+
+    public ArrayList<Double> getResult(){
+        return result;
     }
 }
