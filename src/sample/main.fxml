@@ -15,11 +15,11 @@
          </font></Button>
       <ChoiceBox fx:id="target" layoutX="338.0" layoutY="146.0" prefHeight="30.0" prefWidth="159.0" />
       <ChoiceBox fx:id="origin" layoutX="33.0" layoutY="146.0" prefHeight="30.0" prefWidth="159.0" />
-      <Label layoutX="182.0" layoutY="227.0" prefHeight="53.0" prefWidth="235.0">
+      <Label fx:id="result" layoutX="182.0" layoutY="227.0" prefHeight="53.0" prefWidth="235.0">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <TextField layoutX="116.0" layoutY="81.0" prefHeight="53.0" prefWidth="293.0">
+      <TextField fx:id="input" layoutX="116.0" layoutY="81.0" prefHeight="53.0" prefWidth="293.0">
          <font>
             <Font size="18.0" />
          </font></TextField>

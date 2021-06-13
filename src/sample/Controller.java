@@ -1,17 +1,12 @@
 package sample;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -22,17 +17,14 @@ public class Controller implements Initializable {
     @FXML
     private Label result;
     @FXML
-    private Button exchange;
-    @FXML
-    private Button convert;
-    @FXML
     private ChoiceBox<String> origin;
     @FXML
     private ChoiceBox<String> target;
 
-    private double number;
-    private String[] currentType = {"USD", "HKD", "GBP", "AUD", "CAD", "SGD", "CHF", "JPY", "SEK", "NZD", "THB", "PHP", "IDR", "EUR", "KRW", "VND", "MYR", "CNY"};
+    private final String[] currentType = {"USD", "HKD", "GBP", "AUD", "CAD", "SGD", "CHF", "JPY", "SEK", "NZD", "THB", "PHP", "IDR", "EUR", "KRW", "VND", "MYR", "CNY", "TWD"};
     private ArrayList<Double> data = new ArrayList<>();
+
+    public Controller() {}
 
 
     @Override
@@ -48,23 +40,71 @@ public class Controller implements Initializable {
     }
 
     public void exchangeButton(){
-        if (origin.getValue() == null || target.getValue() == null)
+        if (origin.getValue() == null || target.getValue() == null) {
+            final Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Please select currency type");
+            alert.showAndWait();
             return;
+        }
         int cntOri;
         int cntTar;
         for (cntOri = 0; cntOri < currentType.length; cntOri++){
-            if (currentType[cntOri] == origin.getValue())
+            if (currentType[cntOri].equals(origin.getValue()))
                 break;
         }
         for (cntTar = 0; cntTar < currentType.length; cntTar++){
-            if (currentType[cntTar] == target.getValue())
+            if (currentType[cntTar].equals(target.getValue()))
                 break;
         }
         origin.setValue(currentType[cntTar]);
         target.setValue(currentType[cntOri]);
     }
 
-    public void conv(ActionEvent e){
-        //TODO
+    public void conv(){
+        if (origin.getValue() == null || target.getValue() == null) {
+            final Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Please select currency type");
+            alert.showAndWait();
+            return;
+        }
+
+        String str = input.getText();
+        boolean isNumeric =  str.matches("[+-]?\\d*(\\.\\d+)?");
+        if (!isNumeric) {
+            final Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Input Error!! Please try again.");
+            alert.showAndWait();
+            return;
+        }
+
+
+        double tmp = Double.parseDouble(str);
+        int cntOri;
+        int cntTar;
+        for (cntOri = 0; cntOri < currentType.length; cntOri++){
+            if (currentType[cntOri].equals(origin.getValue()))
+                break;
+        }
+        for (cntTar = 0; cntTar < currentType.length; cntTar++){
+            if (currentType[cntTar].equals(target.getValue()))
+                break;
+        }
+
+
+        if (cntTar == currentType.length - 1){
+            if (cntOri == cntTar){
+                result.setText(Double.toString(tmp));
+            }
+            else {
+                result.setText(Double.toString(data.get(cntOri) * tmp));
+            }
+        }
+        else if (cntOri == currentType.length - 1 && cntTar != currentType.length){
+            result.setText(Double.toString((1/data.get(cntTar)) * tmp));
+        }
+        else {
+            double ratio = data.get(cntOri) / data.get(cntTar);
+            result.setText(Double.toString(ratio * tmp));
+        }
     }
 }
