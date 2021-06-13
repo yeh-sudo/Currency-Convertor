@@ -3,6 +3,12 @@ package sample;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+
+
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.ClientProtocolException;
@@ -23,7 +29,9 @@ public class webCrawler {
     public ArrayList<String> data = new ArrayList<>();
     public ArrayList<Double> result = new ArrayList<>();
 
-    public webCrawler(){
+    public webCrawler() {
+
+
         CloseableHttpClient httpClient = HttpClients.createDefault();
         CloseableHttpResponse response = null;
 

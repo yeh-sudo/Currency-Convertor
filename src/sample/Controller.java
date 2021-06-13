@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -40,6 +41,17 @@ public class Controller implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         origin.getItems().addAll(currentType);
         target.getItems().addAll(currentType);
+
+        Stage stage = new Stage();
+        Pane pane = new Pane();
+        Scene scene1 = new Scene(pane, 200, 200);
+        stage.setScene(scene1);
+        stage.show();
+
+        webCrawler webCrawler = new webCrawler();
+        data = webCrawler.result;
+
+        stage.close();
     }
 
     public void exchangeButton(){
