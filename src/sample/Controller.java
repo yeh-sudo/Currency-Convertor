@@ -2,13 +2,19 @@ package sample;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
@@ -26,9 +32,8 @@ public class Controller implements Initializable {
     private ChoiceBox<String> target;
 
     private double number;
-    private String[] currentType = {"TWD", "CNY", "HKD", "JPY", "KRW", "THB", "SGD", "GBP", "EUR", "DKK", "USD", "ETH", "BTC"};
-    private double[] exchangeRate = {1.0, 0.23, 0.28, 3.89, 40.41, 1.13, 0.048, 0.025, 0.029, 0.22, 0.036};
-    private double[] exchangeRateOfOtherCur = {97719.57, 1257502.55};
+    private String[] currentType = {"USD", "HKD", "GBP", "AUD", "CAD", "SGD", "CHF", "JPY", "SEK", "NZD", "THB", "PHP", "IDR", "EUR", "KRW", "VND", "MYR", "CNY"};
+    private ArrayList<Double> data = new ArrayList<>();
 
 
     @Override
