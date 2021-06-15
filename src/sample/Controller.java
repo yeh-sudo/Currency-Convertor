@@ -1,3 +1,6 @@
+//reset data button
+
+
 package sample;
 
 import javafx.fxml.FXML;
@@ -37,6 +40,7 @@ public class Controller implements Initializable {
         webCrawler webCrawler = new webCrawler();
         webCrawler.setResult();
         data = webCrawler.getResult();
+        result.setText("");
     }
 
     public void exchangeButton(){
