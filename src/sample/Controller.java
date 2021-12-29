@@ -73,6 +73,12 @@ public class Controller implements Initializable {
         }
 
         String str = input.getText();
+        if (str == "") {
+            final Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText("Please enter numbers!");
+            alert.showAndWait();
+            return;
+        }
         boolean isNumeric =  str.matches("[+-]?\\d*(\\.\\d+)?");
         if (!isNumeric) {
             final Alert alert = new Alert(Alert.AlertType.ERROR);
